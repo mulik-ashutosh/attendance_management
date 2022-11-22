@@ -1,9 +1,12 @@
+import 'package:attendance_management/models/auth_models/auth_super_admin_login_model.dart';
 import 'package:attendance_management/screens/main_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_button/sign_in_button.dart';
+
+import '../repository/auth/auth_network_handler.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -41,8 +44,9 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               GestureDetector(
                 onTap: () async {
-                  await signInWithGoogle();
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const MainScreen()));
+                  if(await signInWithGoogle()){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const MainScreen()));
+                  }
                 },
                 child: Container(
                   width: ScreenUtil().screenWidth,
@@ -78,20 +82,19 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Future<UserCredential> signInWithGoogle() async {
+  Future<bool> signInWithGoogle() async {
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
     // Obtain the auth details from the request
     final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
 
-    // Create a new credential
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
+    AuthSuperAdminLoginModel? response = await AuthNetworkHandler().superAdminPostDio(email: googleUser?.email ?? '', idToken: googleAuth?.idToken ?? '');
 
-    // Once signed in, return the UserCredential
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+    if(response != null){
+      return true;
+    }
+
+    return false;
   }
 }

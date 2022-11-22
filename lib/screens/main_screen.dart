@@ -1,9 +1,12 @@
 import 'package:attendance_management/screens/edit_user_screen.dart';
+import 'package:attendance_management/screens/login_screen.dart';
 import 'package:attendance_management/screens/office/admin_home_screen.dart';
 import 'package:attendance_management/screens/super_admin/super_admin_home_screen.dart';
 import 'package:attendance_management/screens/user_home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../repository/auth/auth_network_handler.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -25,7 +28,10 @@ class _MainScreenState extends State<MainScreen> {
           children: [
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const SuperAdminHomeScreen()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const LoginScreen()));
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5),
@@ -51,7 +57,10 @@ class _MainScreenState extends State<MainScreen> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminHomeScreen()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const LoginScreen()));
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5),
@@ -65,7 +74,10 @@ class _MainScreenState extends State<MainScreen> {
                   child: const Center(
                     child: Text(
                       'Admin',
-                      style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500),
                     ),
                   ),
                 ),
@@ -73,7 +85,10 @@ class _MainScreenState extends State<MainScreen> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const UserHomeScreen()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const LoginScreen()));
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5),
@@ -87,7 +102,10 @@ class _MainScreenState extends State<MainScreen> {
                   child: const Center(
                     child: Text(
                       'User',
-                      style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500),
                     ),
                   ),
                 ),
