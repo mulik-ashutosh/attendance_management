@@ -6,7 +6,7 @@ import '../../constants.dart';
 import '../../models/company_models/company_create_employee_post_model.dart';
 import '../../models/company_models/company_employee_get_model.dart';
 
-class AuthNetworkHandler {
+class CompanyNetworkHandler {
   final Dio dio = Dio();
 
   //company employee get method
@@ -23,7 +23,7 @@ class AuthNetworkHandler {
     }
   }
 
-  //company employee post method
+  //company Create employee post method
   Future<CompanyCreateEmployeePostModel?> createEmployeePostDio({
     required String email,
     required String cardId,

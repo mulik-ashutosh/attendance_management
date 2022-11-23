@@ -1,5 +1,6 @@
 import 'package:attendance_management/screens/create_edit_user_screen.dart';
 import 'package:attendance_management/screens/office/todays_log.dart';
+import 'package:attendance_management/screens/office/total_employee.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -138,7 +139,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => const TodayLogScreen()));
                     },
                     child: Container(
-                      height: 225.h,
+                      height: 229.h,
                       width: 150.w,
                       decoration: BoxDecoration(
                         color: const Color(0xFF26252C),
@@ -224,7 +225,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const TodayLogScreen(),
+                                builder: (context) => const TotalEmployeeScreen(),
                               ),
                             );
                           },

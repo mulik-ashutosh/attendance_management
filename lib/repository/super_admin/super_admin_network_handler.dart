@@ -5,7 +5,7 @@ import '../../constants.dart';
 import '../../models/super_admin_models/super_admin_create_organization_post_model.dart';
 import '../../models/super_admin_models/super_admin_organization_get_model.dart';
 
-class AuthNetworkHandler {
+class SuperAdminNetworkHandler {
   final Dio dio = Dio();
 
   //Super admin login get method

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../create_edit_user_screen.dart';
+import '../office/todays_log.dart';
+import 'create_edit_organization_screen.dart';
 
 class SuperAdminHomeScreen extends StatefulWidget {
   const SuperAdminHomeScreen({Key? key}) : super(key: key);
@@ -135,7 +137,7 @@ class _SuperAdminHomeScreenState extends State<SuperAdminHomeScreen> {
               Row(
                 children: [
                   Container(
-                    height: 225.h,
+                    height: 229.h,
                     width: 150.w,
                     decoration: BoxDecoration(
                       color: const Color(0xFF26252C),
@@ -179,54 +181,57 @@ class _SuperAdminHomeScreenState extends State<SuperAdminHomeScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          height: 102.h,
-                          width: 250.w,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF26252C),
-                            borderRadius: BorderRadius.circular(10.r),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 20.w,
-                            vertical: 20.h,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Total Employee",
-                                style: TextStyle(
-                                  color: const Color(0xFF979797),
-                                  fontFamily: "SFPro",
-                                  fontSize: 18.sp,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const TodayLogScreen(),
                               ),
-                              Text(
-                                "256",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "SFPro",
-                                  fontSize: 28.sp,
-                                  fontWeight: FontWeight.w500,
+                            );
+                          },
+                          child: Container(
+                            height: 102.h,
+                            width: 250.w,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF26252C),
+                              borderRadius: BorderRadius.circular(10.r),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 20.w,
+                              vertical: 20.h,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Total Employee",
+                                  style: TextStyle(
+                                    color: const Color(0xFF979797),
+                                    fontFamily: "SFPro",
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
-                              ),
-                            ],
+                                Text(
+                                  "256",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "SFPro",
+                                    fontSize: 28.sp,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         SizedBox(
                           height: 20.h,
                         ),
                         GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const EditUserScreen(),
-                              ),
-                            );
-                          },
+                          onTap: () {},
                           child: Container(
                             height: 102.h,
                             width: 250.w,
@@ -274,7 +279,7 @@ class _SuperAdminHomeScreenState extends State<SuperAdminHomeScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const CreateEditUserScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const CreateEditOrganizationScreen()));
                 },
                 child: Container(
                   height: 102.h,
@@ -289,7 +294,7 @@ class _SuperAdminHomeScreenState extends State<SuperAdminHomeScreen> {
                   ),
                   child: Center(
                     child: Text(
-                      "Create / Edit a user",
+                      "Create / Edit a Organization",
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: "SFPro",

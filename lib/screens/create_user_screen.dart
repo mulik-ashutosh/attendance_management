@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../repository/company/company_network_handler.dart';
+
 class CreateUserScreen extends StatefulWidget {
   const CreateUserScreen({Key? key}) : super(key: key);
 
@@ -9,6 +11,28 @@ class CreateUserScreen extends StatefulWidget {
 }
 
 class _CreateUserScreenState extends State<CreateUserScreen> {
+  final TextEditingController _companyController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _cardIdController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _roleController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    //createUser();
+  }
+
+  void createUser() {
+    CompanyNetworkHandler().createEmployeePostDio(
+      email: _emailController.text,
+      cardId: _cardIdController.text,
+      name: _nameController.text,
+      role: _roleController.text,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,6 +47,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
           children: [
             Positioned.fill(
               child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
                 physics: const BouncingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -70,7 +95,8 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                       ),
                       margin: EdgeInsets.symmetric(vertical: 5.h),
                       child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 10.h, horizontal: 15.w),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -82,6 +108,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                               ),
                             ),
                             TextField(
+                              controller: _companyController,
                               decoration: const InputDecoration(
                                 isDense: true,
                                 border: InputBorder.none,
@@ -104,7 +131,8 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                       ),
                       margin: EdgeInsets.symmetric(vertical: 5.h),
                       child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 10.h, horizontal: 15.w),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -116,6 +144,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                               ),
                             ),
                             TextField(
+                              controller: _phoneController,
                               decoration: const InputDecoration(
                                 isDense: true,
                                 border: InputBorder.none,
@@ -138,7 +167,8 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                       ),
                       margin: EdgeInsets.symmetric(vertical: 5.h),
                       child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 10.h, horizontal: 15.w),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -150,6 +180,115 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                               ),
                             ),
                             TextField(
+                              controller: _emailController,
+                              decoration: const InputDecoration(
+                                isDense: true,
+                                border: InputBorder.none,
+                              ),
+                              cursorColor: Colors.white,
+                              style: TextStyle(
+                                fontSize: 18.h,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF26252C),
+                        borderRadius: BorderRadius.circular(5.r),
+                      ),
+                      margin: EdgeInsets.symmetric(vertical: 5.h),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 10.h, horizontal: 15.w),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'CardID',
+                              style: TextStyle(
+                                fontSize: 12.sp,
+                                color: const Color(0xFFEBEBF5),
+                              ),
+                            ),
+                            TextField(
+                              controller: _cardIdController,
+                              decoration: const InputDecoration(
+                                isDense: true,
+                                border: InputBorder.none,
+                              ),
+                              cursorColor: Colors.white,
+                              style: TextStyle(
+                                fontSize: 18.h,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF26252C),
+                        borderRadius: BorderRadius.circular(5.r),
+                      ),
+                      margin: EdgeInsets.symmetric(vertical: 5.h),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 10.h, horizontal: 15.w),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'User Name',
+                              style: TextStyle(
+                                fontSize: 12.sp,
+                                color: const Color(0xFFEBEBF5),
+                              ),
+                            ),
+                            TextField(
+                              controller: _nameController,
+                              decoration: const InputDecoration(
+                                isDense: true,
+                                border: InputBorder.none,
+                              ),
+                              cursorColor: Colors.white,
+                              style: TextStyle(
+                                fontSize: 18.h,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF26252C),
+                        borderRadius: BorderRadius.circular(5.r),
+                      ),
+                      margin: EdgeInsets.symmetric(vertical: 5.h),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 10.h, horizontal: 15.w),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Role',
+                              style: TextStyle(
+                                fontSize: 12.sp,
+                                color: const Color(0xFFEBEBF5),
+                              ),
+                            ),
+                            TextField(
+                              controller: _roleController,
                               decoration: const InputDecoration(
                                 isDense: true,
                                 border: InputBorder.none,
@@ -177,17 +316,27 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Container(
-                    width: 359,
-                    height: 44,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF0A84FF),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Save',
-                        style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        createUser();
+                      });
+                    },
+                    child: Container(
+                      width: 359,
+                      height: 44,
+                      decoration: BoxDecoration(
+                        color: Color(0xFF0A84FF),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Save',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500),
+                        ),
                       ),
                     ),
                   ),

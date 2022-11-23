@@ -6,7 +6,7 @@ import '../../constants.dart';
 import '../../models/organization_models/organization_companies_get_model.dart';
 import '../../models/organization_models/organization_create_companies_post_model.dart';
 
-class AuthNetworkHandler {
+class OrganizationNetworkHandler {
   final Dio dio = Dio();
 
   //organization get companies method
