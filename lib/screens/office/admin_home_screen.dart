@@ -1,3 +1,4 @@
+import 'package:attendance_management/screens/create_edit_user_screen.dart';
 import 'package:attendance_management/screens/office/todays_log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -132,42 +133,47 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
               ),
               Row(
                 children: [
-                  Container(
-                    height: 225.h,
-                    width: 150.w,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF26252C),
-                      borderRadius: BorderRadius.circular(10.r),
-                    ),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 20.w,
-                      vertical: 20.h,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Entered Today",
-                          style: TextStyle(
-                            color: const Color(0xFF979797),
-                            fontFamily: "SFPro",
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.w500,
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const TodayLogScreen()));
+                    },
+                    child: Container(
+                      height: 225.h,
+                      width: 150.w,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF26252C),
+                        borderRadius: BorderRadius.circular(10.r),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20.w,
+                        vertical: 20.h,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Entered Today",
+                            style: TextStyle(
+                              color: const Color(0xFF979797),
+                              fontFamily: "SFPro",
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10.h,
-                        ),
-                        Text(
-                          "09:20",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "SFPro",
-                            fontSize: 52.sp,
-                            fontWeight: FontWeight.w500,
+                          SizedBox(
+                            height: 10.h,
                           ),
-                        ),
-                      ],
+                          Text(
+                            "09:20",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: "SFPro",
+                              fontSize: 52.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -177,41 +183,51 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          height: 102.h,
-                          width: 250.w,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF26252C),
-                            borderRadius: BorderRadius.circular(10.r),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 20.w,
-                            vertical: 20.h,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Total Employee",
-                                style: TextStyle(
-                                  color: const Color(0xFF979797),
-                                  fontFamily: "SFPro",
-                                  fontSize: 18.sp,
-                                  fontWeight: FontWeight.w500,
+                        GestureDetector(
+                          child: Container(
+                            height: 102.h,
+                            width: 250.w,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF26252C),
+                              borderRadius: BorderRadius.circular(10.r),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 20.w,
+                              vertical: 20.h,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Total Employee",
+                                  style: TextStyle(
+                                    color: const Color(0xFF979797),
+                                    fontFamily: "SFPro",
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                "256",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "SFPro",
-                                  fontSize: 28.sp,
-                                  fontWeight: FontWeight.w500,
+                                Text(
+                                  "256",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "SFPro",
+                                    fontSize: 28.sp,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
+                          onTap: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const TodayLogScreen(),
+                              ),
+                            );
+                          },
                         ),
                         SizedBox(
                           height: 20.h,
@@ -221,7 +237,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const TodayLogScreen(),
+                                builder: (context) => const CreateEditUserScreen(),
                               ),
                             );
                           },

@@ -12,20 +12,30 @@ class AuthNetworkHandler {
   //organization get companies method
   Future<OrganizationCompaniesGetModel?> getDio() async {
     try {
-      var response = await dio.get(Constants.baseUrl + '/companies');
-      OrganizationCompaniesGetModel _model = OrganizationCompaniesGetModel.fromJson(response.data);
-      return _model;
+      var response = await dio.get('${Constants.baseUrl}/companies');
+      if (response.statusCode == 200) {
+        OrganizationCompaniesGetModel model =
+            OrganizationCompaniesGetModel.fromJson(response.data);
+        return model;
+      }
     } catch (e) {
       print(e);
     }
   }
+
   //organization create company post method
-  Future<OrganizationCreateCompaniesPostModel?> postDio() async {
+  Future<OrganizationCreateCompaniesPostModel?> postDio(
+      {required String name, required String email}) async {
     try {
-      var response = await dio.post(Constants.baseUrl + '/companies', data: '');
-      return OrganizationCreateCompaniesPostModel.fromJson(json.decode(response.data));
+      var response = await dio.post('${Constants.baseUrl}/companies',
+          data: {'name': name, "email": email});
+      if (response.statusCode == 200) {
+        return OrganizationCreateCompaniesPostModel.fromJson(
+            json.decode(response.data));
+      }
     } catch (e) {
       print(e);
     }
+    return null;
   }
 }

@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ],
           ),
           Text(
-            "earchcard".toUpperCase(),
+            "earthcard".toUpperCase(),
             style: TextStyle(
               color: Colors.white,
               fontFamily: "SFPro",

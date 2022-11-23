@@ -1,5 +1,7 @@
 import 'package:attendance_management/screens/edit_user_screen.dart';
 import 'package:attendance_management/screens/login_screen.dart';
+import 'package:attendance_management/screens/login_screen1.dart';
+import 'package:attendance_management/screens/login_screen2.dart';
 import 'package:attendance_management/screens/office/admin_home_screen.dart';
 import 'package:attendance_management/screens/super_admin/super_admin_home_screen.dart';
 import 'package:attendance_management/screens/user_home_screen.dart';
@@ -28,10 +30,14 @@ class _MainScreenState extends State<MainScreen> {
           children: [
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const LoginScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) =>
+                //     const LoginScreen(userType: UserType.SuperAdmin),
+                //   ),
+                // );
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5),
@@ -57,10 +63,14 @@ class _MainScreenState extends State<MainScreen> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const LoginScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginScreen1()));
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) =>
+                //         const LoginScreen(userType: UserType.Admin),
+                //   ),
+                // );
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5),
@@ -85,10 +95,13 @@ class _MainScreenState extends State<MainScreen> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const LoginScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginScreen2()));
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //       builder: (context) =>
+                //           const LoginScreen(userType: UserType.User)),
+                // );
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5),

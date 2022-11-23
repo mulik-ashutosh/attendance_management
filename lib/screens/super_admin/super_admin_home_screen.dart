@@ -2,6 +2,8 @@ import 'package:attendance_management/screens/edit_user_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../create_edit_user_screen.dart';
+
 class SuperAdminHomeScreen extends StatefulWidget {
   const SuperAdminHomeScreen({Key? key}) : super(key: key);
 
@@ -272,7 +274,7 @@ class _SuperAdminHomeScreenState extends State<SuperAdminHomeScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const EditUserScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const CreateEditUserScreen()));
                 },
                 child: Container(
                   height: 102.h,

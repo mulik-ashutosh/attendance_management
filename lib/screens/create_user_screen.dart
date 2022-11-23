@@ -32,7 +32,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                     ),
                     Center(
                       child: Text(
-                        'Edit User',
+                        'Create User',
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: "SFPro",

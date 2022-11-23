@@ -11,16 +11,17 @@ class AuthNetworkHandler {
   final Dio dio = Dio();
 
   //auth Super admin login post method
-  Future<AuthSuperAdminLoginModel?> superAdminPostDio({required String email, required String idToken}) async {
+  Future<AuthSuperAdminLoginModel?> superAdminPostDio(
+      {required String email, required String idToken}) async {
     try {
       var response = await dio.post(
         '${Constants.baseUrl}/auth/login',
         data: {
-          "email" : email,
-          "idToken" : idToken,
+          "email": email,
+          "idToken": idToken,
         },
       );
-      if(response.statusCode == 200) {
+      if (response.statusCode == 200) {
         return AuthSuperAdminLoginModel.fromJson(json.decode(response.data));
       }
       return null;
@@ -31,35 +32,49 @@ class AuthNetworkHandler {
   }
 
   //auth organization login post method
-  Future<AuthOrganizationLoginModel?> organizationPostDio() async {
+  Future<AuthOrganizationLoginModel?> organizationPostDio(
+      {required String email, required String idToken}) async {
     try {
-      var response =
-          await dio.post(Constants.baseUrl + '/auth/login', data: '');
-      return AuthOrganizationLoginModel.fromJson(json.decode(response.data));
+      var response = await dio.post('${Constants.baseUrl}/auth/login',
+          data: {'email': email, 'idToken': idToken});
+      if (response.statusCode == 200) {
+        return AuthOrganizationLoginModel.fromJson(json.decode(response.data));
+      }
     } catch (e) {
       print(e);
     }
+    return null;
   }
 
   //auth company login post method
-  Future<AuthCompanyLoginModel?> companyPostDio() async {
+  Future<AuthCompanyLoginModel?> companyPostDio(
+      {required String email, required String idToken}) async {
     try {
-      var response =
-          await dio.post(Constants.baseUrl + '/auth/login', data: '');
-      return AuthCompanyLoginModel.fromJson(json.decode(response.data));
+      var response = await dio.post('${Constants.baseUrl}/auth/login', data: {
+        "email": email,
+        "idToken": idToken,
+      });
+      if (response.statusCode == 200) {
+        return AuthCompanyLoginModel.fromJson(json.decode(response.data));
+      }
     } catch (e) {
       print(e);
     }
+    return null;
   }
 
   //auth refresh token post method
-  Future<AuthRefreshTokenModel?> refreshTokenPostDio() async {
+  Future<AuthRefreshTokenModel?> refreshTokenPostDio(
+      {required String refreshToken}) async {
     try {
-      var response =
-          await dio.post(Constants.baseUrl + '/auth/refresh-tokens', data: '');
-      return AuthRefreshTokenModel.fromJson(json.decode(response.data));
+      var response = await dio.post('${Constants.baseUrl}/auth/refresh-tokens',
+          data: {'refreshToken': refreshToken});
+      if (response.statusCode == 200) {
+        return AuthRefreshTokenModel.fromJson(json.decode(response.data));
+      }
     } catch (e) {
       print(e);
     }
+    return null;
   }
 }

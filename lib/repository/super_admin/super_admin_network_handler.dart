@@ -11,26 +11,30 @@ class AuthNetworkHandler {
   //Super admin login get method
   Future<SuperAdminOrganizationGetModel?> getDio() async {
     try {
-      var response = await dio.get(Constants.baseUrl + '/organizations');
-      SuperAdminOrganizationGetModel _model = SuperAdminOrganizationGetModel.fromJson(response.data);
-      // print(response.data);
-      // print(response.statusCode);
-      return _model;
+      var response = await dio.get('${Constants.baseUrl}/organizations');
+      if (response.statusCode == 200) {
+        SuperAdminOrganizationGetModel model =
+            SuperAdminOrganizationGetModel.fromJson(response.data);
+        return model;
+      }
     } catch (e) {
       print(e);
     }
   }
+
   //Super admin login post method
-  Future<SuperAdminCreateOrganizationPostModel?> postDio() async {
+  Future<SuperAdminCreateOrganizationPostModel?> postDio(
+      {required String name, required String email}) async {
     try {
-      var response = await dio.post(Constants.baseUrl + '/organizations', data: '');
-      return SuperAdminCreateOrganizationPostModel.fromJson(json.decode(response.data));
-      // print(response.data);
-      // print(response.statusCode);
+      var response = await dio.post('${Constants.baseUrl}/organizations',
+          data: {'name': name, 'email': email});
+      if (response.statusCode == 200) {
+        return SuperAdminCreateOrganizationPostModel.fromJson(
+            json.decode(response.data));
+      }
     } catch (e) {
       print(e);
     }
+    return null;
   }
 }
-
-

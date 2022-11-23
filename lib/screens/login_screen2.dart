@@ -13,16 +13,16 @@ import 'main_screen.dart';
 // ignore: constant_identifier_names
 //enum UserType { SuperAdmin, Admin, User }
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen2 extends StatefulWidget {
   //final UserType userType;
 
-  const LoginScreen({Key? key, /*required this.userType*/}) : super(key: key);
+  const LoginScreen2({Key? key, /*required this.userType*/}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<LoginScreen2> createState() => _LoginScreen2State();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreen2State extends State<LoginScreen2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               GestureDetector(
                 onTap: () async {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => SuperAdminHomeScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const UserHomeScreen()));
                   // if (await signInWithGoogle()) {
                   //   if (widget.userType == UserType.SuperAdmin) {
                   //     Navigator.push(
