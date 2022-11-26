@@ -25,12 +25,12 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
   }
 
   void createUser() {
-    CompanyNetworkHandler().createEmployeePostDio(
-      email: _emailController.text,
-      cardId: _cardIdController.text,
-      name: _nameController.text,
-      role: _roleController.text,
-    );
+    // CompanyNetworkHandler().createEmployeePostDio(
+    //   email: _emailController.text,
+    //   cardId: _cardIdController.text,
+    //   name: _nameController.text,
+    //   role: _roleController.text,
+    // );
   }
 
   @override

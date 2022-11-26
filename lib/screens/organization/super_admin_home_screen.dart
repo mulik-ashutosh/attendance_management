@@ -4,16 +4,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../create_edit_user_screen.dart';
 import '../office/todays_log.dart';
-import 'create_edit_organization_screen.dart';
+import 'create_edit_company_screen.dart';
 
-class SuperAdminHomeScreen extends StatefulWidget {
-  const SuperAdminHomeScreen({Key? key}) : super(key: key);
+class OrganizationHomeScreen extends StatefulWidget {
+  const OrganizationHomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<SuperAdminHomeScreen> createState() => _SuperAdminHomeScreenState();
+  State<OrganizationHomeScreen> createState() => _OrganizationHomeScreenState();
 }
 
-class _SuperAdminHomeScreenState extends State<SuperAdminHomeScreen> {
+class _OrganizationHomeScreenState extends State<OrganizationHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -279,7 +279,7 @@ class _SuperAdminHomeScreenState extends State<SuperAdminHomeScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const CreateEditOrganizationScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const CreateEditCompanyScreen()));
                 },
                 child: Container(
                   height: 102.h,

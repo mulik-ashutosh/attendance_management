@@ -1,15 +1,10 @@
 import 'package:attendance_management/screens/edit_user_screen.dart';
 import 'package:attendance_management/screens/login_screen.dart';
-import 'package:attendance_management/screens/login_screen1.dart';
-import 'package:attendance_management/screens/login_screen2.dart';
-import 'package:attendance_management/screens/office/admin_home_screen.dart';
-import 'package:attendance_management/screens/super_admin/super_admin_home_screen.dart';
-import 'package:attendance_management/screens/user_home_screen.dart';
+import 'package:attendance_management/screens/office/admin_home_screen.dart';import 'package:attendance_management/screens/user_home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../repository/auth/auth_network_handler.dart';
-
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 
@@ -30,14 +25,14 @@ class _MainScreenState extends State<MainScreen> {
           children: [
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) =>
-                //     const LoginScreen(userType: UserType.SuperAdmin),
-                //   ),
-                // );
+                //Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                    const LoginScreen(userType: UserType.Organization),
+                  ),
+                );
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5),
@@ -50,7 +45,7 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                   child: const Center(
                     child: Text(
-                      'Super Admin',
+                      'Organization',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
@@ -63,14 +58,14 @@ class _MainScreenState extends State<MainScreen> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginScreen1()));
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) =>
-                //         const LoginScreen(userType: UserType.Admin),
-                //   ),
-                // );
+                //Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginScreen1()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        const LoginScreen(userType: UserType.Company),
+                  ),
+                );
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5),
@@ -83,7 +78,7 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                   child: const Center(
                     child: Text(
-                      'Admin',
+                      'Company',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 16,
@@ -95,13 +90,13 @@ class _MainScreenState extends State<MainScreen> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginScreen2()));
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //       builder: (context) =>
-                //           const LoginScreen(userType: UserType.User)),
-                // );
+                //Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginScreen2()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          const LoginScreen(userType: UserType.User)),
+                );
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5),

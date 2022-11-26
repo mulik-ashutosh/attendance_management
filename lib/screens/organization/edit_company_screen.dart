@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class EditOrganizationScreen extends StatefulWidget {
-  const EditOrganizationScreen({Key? key}) : super(key: key);
+class EditCompanyScreen extends StatefulWidget {
+  const EditCompanyScreen({Key? key}) : super(key: key);
 
   @override
-  State<EditOrganizationScreen> createState() => _EditOrganizationScreenState();
+  State<EditCompanyScreen> createState() => _EditCompanyScreenState();
 }
 
-class _EditOrganizationScreenState extends State<EditOrganizationScreen> {
+class _EditCompanyScreenState extends State<EditCompanyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,16 +1,16 @@
 import 'dart:convert';
 
-/// employee : {"role":"organization","_id":"637b4703fc204710623ca619","name":"BHAU","email":"bhau@test.com","company":"637b4703fc204710623ca616","id":"637b4703fc204710623ca619"}
-/// tokens : {"access":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MzdiNDcwM2ZjMjA0NzEwNjIzY2E2MTkiLCJpYXQiOjE2NjkwOTI2NTYsImV4cCI6MTY2OTA5NDQ1NiwidHlwZSI6ImFjY2VzcyJ9.4qdJUPq8kbubvLqNPVfZZ0rmhkpI4LVQ4-nAAojfRHw","expires":"2022-11-22T05:20:56.478Z"},"refresh":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MzdiNDcwM2ZjMjA0NzEwNjIzY2E2MTkiLCJpYXQiOjE2NjkwOTI2NTYsImV4cCI6MTY3MTY4NDY1NiwidHlwZSI6InJlZnJlc2gifQ.9O_leijN0oiuqYsPfGX82jQDC5qeyKTSaRDpEU9S8Cw","expires":"2022-12-22T04:50:56.479Z"}}
+/// employee : {"role":"superAdmin","_id":"6381ce6dd1e6ff6343257ea8","email":"sandesh@blockchaininternationale.com","name":"Sandesh","id":"6381ce6dd1e6ff6343257ea8"}
+/// tokens : {"access":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MzgxY2U2ZGQxZTZmZjYzNDMyNTdlYTgiLCJpYXQiOjE2Njk0NTgyMDUsImV4cCI6MTY2OTQ2MDAwNSwidHlwZSI6ImFjY2VzcyJ9.TAIuNe0Yn6u4ETAPOGpuwbF1CggjLq-9jlWbCDH9vzY","expires":"2022-11-26T10:53:25.564Z"},"refresh":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MzgxY2U2ZGQxZTZmZjYzNDMyNTdlYTgiLCJpYXQiOjE2Njk0NTgyMDUsImV4cCI6MTY3MjA1MDIwNSwidHlwZSI6InJlZnJlc2gifQ.S7nJXo94PAN4lpnVIENWb4CjkOShIQb-T6R582EApO4","expires":"2022-12-26T10:23:25.565Z"}}
 
-AuthOrganizationLoginModel authOrganizationLoginModelFromJson(String str) =>
-    AuthOrganizationLoginModel.fromJson(json.decode(str));
+AuthSuperAdminLoginPostModel authSuperAdminLoginPostModelFromJson(String str) =>
+    AuthSuperAdminLoginPostModel.fromJson(json.decode(str));
 
-String authOrganizationLoginModelToJson(AuthOrganizationLoginModel data) =>
+String authSuperAdminLoginPostModelToJson(AuthSuperAdminLoginPostModel data) =>
     json.encode(data.toJson());
 
-class AuthOrganizationLoginModel {
-  AuthOrganizationLoginModel({
+class AuthSuperAdminLoginPostModel {
+  AuthSuperAdminLoginPostModel({
     Employee? employee,
     Tokens? tokens,
   }) {
@@ -18,7 +18,7 @@ class AuthOrganizationLoginModel {
     _tokens = tokens;
   }
 
-  AuthOrganizationLoginModel.fromJson(dynamic json) {
+  AuthSuperAdminLoginPostModel.fromJson(dynamic json) {
     _employee =
         json['employee'] != null ? Employee.fromJson(json['employee']) : null;
     _tokens = json['tokens'] != null ? Tokens.fromJson(json['tokens']) : null;
@@ -27,11 +27,11 @@ class AuthOrganizationLoginModel {
   Employee? _employee;
   Tokens? _tokens;
 
-  AuthOrganizationLoginModel copyWith({
+  AuthSuperAdminLoginPostModel copyWith({
     Employee? employee,
     Tokens? tokens,
   }) =>
-      AuthOrganizationLoginModel(
+      AuthSuperAdminLoginPostModel(
         employee: employee ?? _employee,
         tokens: tokens ?? _tokens,
       );
@@ -52,8 +52,8 @@ class AuthOrganizationLoginModel {
   }
 }
 
-/// access : {"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MzdiNDcwM2ZjMjA0NzEwNjIzY2E2MTkiLCJpYXQiOjE2NjkwOTI2NTYsImV4cCI6MTY2OTA5NDQ1NiwidHlwZSI6ImFjY2VzcyJ9.4qdJUPq8kbubvLqNPVfZZ0rmhkpI4LVQ4-nAAojfRHw","expires":"2022-11-22T05:20:56.478Z"}
-/// refresh : {"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MzdiNDcwM2ZjMjA0NzEwNjIzY2E2MTkiLCJpYXQiOjE2NjkwOTI2NTYsImV4cCI6MTY3MTY4NDY1NiwidHlwZSI6InJlZnJlc2gifQ.9O_leijN0oiuqYsPfGX82jQDC5qeyKTSaRDpEU9S8Cw","expires":"2022-12-22T04:50:56.479Z"}
+/// access : {"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MzgxY2U2ZGQxZTZmZjYzNDMyNTdlYTgiLCJpYXQiOjE2Njk0NTgyMDUsImV4cCI6MTY2OTQ2MDAwNSwidHlwZSI6ImFjY2VzcyJ9.TAIuNe0Yn6u4ETAPOGpuwbF1CggjLq-9jlWbCDH9vzY","expires":"2022-11-26T10:53:25.564Z"}
+/// refresh : {"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MzgxY2U2ZGQxZTZmZjYzNDMyNTdlYTgiLCJpYXQiOjE2Njk0NTgyMDUsImV4cCI6MTY3MjA1MDIwNSwidHlwZSI6InJlZnJlc2gifQ.S7nJXo94PAN4lpnVIENWb4CjkOShIQb-T6R582EApO4","expires":"2022-12-26T10:23:25.565Z"}
 
 Tokens tokensFromJson(String str) => Tokens.fromJson(json.decode(str));
 
@@ -102,8 +102,8 @@ class Tokens {
   }
 }
 
-/// token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MzdiNDcwM2ZjMjA0NzEwNjIzY2E2MTkiLCJpYXQiOjE2NjkwOTI2NTYsImV4cCI6MTY3MTY4NDY1NiwidHlwZSI6InJlZnJlc2gifQ.9O_leijN0oiuqYsPfGX82jQDC5qeyKTSaRDpEU9S8Cw"
-/// expires : "2022-12-22T04:50:56.479Z"
+/// token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MzgxY2U2ZGQxZTZmZjYzNDMyNTdlYTgiLCJpYXQiOjE2Njk0NTgyMDUsImV4cCI6MTY3MjA1MDIwNSwidHlwZSI6InJlZnJlc2gifQ.S7nJXo94PAN4lpnVIENWb4CjkOShIQb-T6R582EApO4"
+/// expires : "2022-12-26T10:23:25.565Z"
 
 Refresh refreshFromJson(String str) => Refresh.fromJson(json.decode(str));
 
@@ -147,8 +147,8 @@ class Refresh {
   }
 }
 
-/// token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MzdiNDcwM2ZjMjA0NzEwNjIzY2E2MTkiLCJpYXQiOjE2NjkwOTI2NTYsImV4cCI6MTY2OTA5NDQ1NiwidHlwZSI6ImFjY2VzcyJ9.4qdJUPq8kbubvLqNPVfZZ0rmhkpI4LVQ4-nAAojfRHw"
-/// expires : "2022-11-22T05:20:56.478Z"
+/// token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MzgxY2U2ZGQxZTZmZjYzNDMyNTdlYTgiLCJpYXQiOjE2Njk0NTgyMDUsImV4cCI6MTY2OTQ2MDAwNSwidHlwZSI6ImFjY2VzcyJ9.TAIuNe0Yn6u4ETAPOGpuwbF1CggjLq-9jlWbCDH9vzY"
+/// expires : "2022-11-26T10:53:25.564Z"
 
 Access accessFromJson(String str) => Access.fromJson(json.decode(str));
 
@@ -192,12 +192,11 @@ class Access {
   }
 }
 
-/// role : "organization"
-/// _id : "637b4703fc204710623ca619"
-/// name : "BHAU"
-/// email : "bhau@test.com"
-/// company : "637b4703fc204710623ca616"
-/// id : "637b4703fc204710623ca619"
+/// role : "superAdmin"
+/// _id : "6381ce6dd1e6ff6343257ea8"
+/// email : "sandesh@blockchaininternationale.com"
+/// name : "Sandesh"
+/// id : "6381ce6dd1e6ff6343257ea8"
 
 Employee employeeFromJson(String str) => Employee.fromJson(json.decode(str));
 
@@ -206,65 +205,58 @@ String employeeToJson(Employee data) => json.encode(data.toJson());
 class Employee {
   Employee({
     String? role,
-    String? name,
     String? email,
-    String? company,
+    String? name,
     String? id,
   }) {
     _role = role;
-    _name = name;
+
     _email = email;
-    _company = company;
+    _name = name;
     _id = id;
   }
 
   Employee.fromJson(dynamic json) {
     _role = json['role'];
 
-    _name = json['name'];
     _email = json['email'];
-    _company = json['company'];
+    _name = json['name'];
     _id = json['id'];
   }
 
   String? _role;
 
-  String? _name;
   String? _email;
-  String? _company;
+  String? _name;
   String? _id;
 
   Employee copyWith({
     String? role,
-    String? name,
     String? email,
-    String? company,
+    String? name,
     String? id,
   }) =>
       Employee(
         role: role ?? _role,
-        name: name ?? _name,
         email: email ?? _email,
-        company: company ?? _company,
+        name: name ?? _name,
         id: id ?? _id,
       );
 
   String? get role => _role;
 
-  String? get name => _name;
-
   String? get email => _email;
 
-  String? get company => _company;
+  String? get name => _name;
 
   String? get id => _id;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['role'] = _role;
-    map['name'] = _name;
+
     map['email'] = _email;
-    map['company'] = _company;
+    map['name'] = _name;
     map['id'] = _id;
     return map;
   }

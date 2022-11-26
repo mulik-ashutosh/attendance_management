@@ -1,8 +1,6 @@
 import 'package:attendance_management/screens/create_edit_user_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../models/company_models/company_employee_get_model.dart';
 import '../../repository/company/company_network_handler.dart';
 
 class TotalEmployeeScreen extends StatefulWidget {
@@ -14,17 +12,17 @@ class TotalEmployeeScreen extends StatefulWidget {
 
 class _TotalEmployeeScreenState extends State<TotalEmployeeScreen> {
 
-  CompanyEmployeeGetModel? user;
+  //CompanyEmployeeGetModel? user;
 
   @override
   void initState() {
     super.initState();
-    getUsers();
+    //getUsers();
   }
 
-  void getUsers() async {
-    var user = (await CompanyNetworkHandler().getDio());
-  }
+  // void getUsers() async {
+  //   var user = (await CompanyNetworkHandler().getDio());
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +72,7 @@ class _TotalEmployeeScreenState extends State<TotalEmployeeScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        user?.message ?? '',
+                        'Manish Gupta',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20.sp,

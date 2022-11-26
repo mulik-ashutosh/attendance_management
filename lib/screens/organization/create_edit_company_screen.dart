@@ -3,17 +3,17 @@ import 'package:attendance_management/screens/edit_user_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'create_organization_screen.dart';
-import 'edit_organization_screen.dart';
+import 'create_company_screen.dart';
+import 'edit_company_screen.dart';
 
-class CreateEditOrganizationScreen extends StatefulWidget {
-  const CreateEditOrganizationScreen({Key? key}) : super(key: key);
+class CreateEditCompanyScreen extends StatefulWidget {
+  const CreateEditCompanyScreen({Key? key}) : super(key: key);
 
   @override
-  State<CreateEditOrganizationScreen> createState() => _CreateEditOrganizationScreenState();
+  State<CreateEditCompanyScreen> createState() => _CreateEditCompanyScreenState();
 }
 
-class _CreateEditOrganizationScreenState extends State<CreateEditOrganizationScreen> {
+class _CreateEditCompanyScreenState extends State<CreateEditCompanyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +25,7 @@ class _CreateEditOrganizationScreenState extends State<CreateEditOrganizationScr
           children: [
             GestureDetector(
               onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const EditOrganizationScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const EditCompanyScreen()));
               },
               child: Container(
                 height: 50.h,
@@ -51,7 +51,7 @@ class _CreateEditOrganizationScreenState extends State<CreateEditOrganizationScr
             ),
             GestureDetector(
               onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const CreateOrganizationScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const CreateCompanyScreen()));
               },
               child: Container(
                 height: 50.h,

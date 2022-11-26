@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CreateOrganizationScreen extends StatefulWidget {
-  const CreateOrganizationScreen({Key? key}) : super(key: key);
+class CreateCompanyScreen extends StatefulWidget {
+  const CreateCompanyScreen({Key? key}) : super(key: key);
 
   @override
-  State<CreateOrganizationScreen> createState() => _CreateOrganizationScreenState();
+  State<CreateCompanyScreen> createState() => _CreateCompanyScreenState();
 }
 
-class _CreateOrganizationScreenState extends State<CreateOrganizationScreen> {
+class _CreateCompanyScreenState extends State<CreateCompanyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
