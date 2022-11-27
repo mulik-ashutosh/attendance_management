@@ -1,6 +1,5 @@
 import 'package:attendance_management/screens/login_screen.dart';
 import 'package:attendance_management/screens/main_screen.dart';
-import 'package:attendance_management/screens/office/admin_home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

@@ -1,15 +1,14 @@
-import 'package:attendance_management/screens/office/admin_home_screen.dart';
-import 'package:attendance_management/screens/user_home_screen.dart';
+import 'package:attendance_management/screens/user/user_home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../model/auth_models/auth_company_login_post_model.dart';
 import '../model/auth_models/auth_employee_login_post_model.dart';
 import '../model/auth_models/auth_organization_login_post_model.dart';
-import '../model/auth_models/auth_super_admin_login_post_model.dart';
 import '../repository/auth/auth_network_handler.dart';
-import 'main_screen.dart';
-import 'organization/super_admin_home_screen.dart';
+import 'company/company_home_screen.dart';
+import 'organization/organization_home_screen.dart';
+
 
 // ignore: constant_identifier_names
 enum UserType { Organization, Company, User }
@@ -71,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const AdminHomeScreen()));
+                              builder: (context) => const CompanyHomeScreen()));
                     }
                   }
                 },
@@ -120,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (widget.userType == UserType.Organization) {
       AuthOrganizationLoginPostModel? response = await AuthNetworkHandler()
           .organizationPostDio(
-              email: /*googleUser?.email ?? */ "bhau2@test.com",
+              email: /*googleUser?.email ?? */ "bhau@testy.com",
               idToken: googleAuth?.idToken ?? '');
       if (response != null) {
         return true;

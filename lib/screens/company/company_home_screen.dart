@@ -1,17 +1,18 @@
-import 'package:attendance_management/screens/create_edit_user_screen.dart';
-import 'package:attendance_management/screens/office/todays_log.dart';
-import 'package:attendance_management/screens/office/total_employee.dart';
+import 'package:attendance_management/screens/company/todays_log.dart';
+import 'package:attendance_management/screens/company/total_employee.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AdminHomeScreen extends StatefulWidget {
-  const AdminHomeScreen({Key? key}) : super(key: key);
+import 'create_edit_user_screen.dart';
+
+class CompanyHomeScreen extends StatefulWidget {
+  const CompanyHomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<AdminHomeScreen> createState() => _AdminHomeScreenState();
+  State<CompanyHomeScreen> createState() => _CompanyHomeScreenState();
 }
 
-class _AdminHomeScreenState extends State<AdminHomeScreen> {
+class _CompanyHomeScreenState extends State<CompanyHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

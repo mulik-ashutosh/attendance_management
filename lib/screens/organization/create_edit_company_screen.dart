@@ -1,5 +1,3 @@
-import 'package:attendance_management/screens/create_user_screen.dart';
-import 'package:attendance_management/screens/edit_user_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -35,7 +33,7 @@ class _CreateEditCompanyScreenState extends State<CreateEditCompanyScreen> {
                 ),
                 child: Center(
                   child: Text(
-                    "Edit Organization Details",
+                    "Edit Company Details",
                     style: TextStyle(
                       color: Colors.white,
                       fontFamily: "SFPro",
@@ -61,7 +59,7 @@ class _CreateEditCompanyScreenState extends State<CreateEditCompanyScreen> {
                 ),
                 child: Center(
                   child: Text(
-                    "Create New Organization",
+                    "Create New Company",
                     style: TextStyle(
                       color: Colors.white,
                       fontFamily: "SFPro",

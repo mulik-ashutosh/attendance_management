@@ -1,22 +1,36 @@
-import 'package:attendance_management/screens/create_edit_user_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../repository/company/company_network_handler.dart';
+import 'create_edit_user_screen.dart';
 
-class TodayLogScreen extends StatefulWidget {
-  const TodayLogScreen({Key? key}) : super(key: key);
+class TotalEmployeeScreen extends StatefulWidget {
+  const TotalEmployeeScreen({Key? key}) : super(key: key);
 
   @override
-  State<TodayLogScreen> createState() => _TodayLogScreenState();
+  State<TotalEmployeeScreen> createState() => _TotalEmployeeScreenState();
 }
 
-class _TodayLogScreenState extends State<TodayLogScreen> {
+class _TotalEmployeeScreenState extends State<TotalEmployeeScreen> {
+
+  //CompanyEmployeeGetModel? user;
+
+  @override
+  void initState() {
+    super.initState();
+    //getUsers();
+  }
+
+  // void getUsers() async {
+  //   var user = (await CompanyNetworkHandler().getDio());
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Today logs"),
+        title: const Text("Total Employee"),
         backgroundColor: Colors.black,
         titleTextStyle: TextStyle(
           fontSize: 25.sp,
@@ -58,7 +72,7 @@ class _TodayLogScreenState extends State<TodayLogScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Mon 01 May',
+                        'Manish Gupta',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20.sp,
@@ -69,7 +83,7 @@ class _TodayLogScreenState extends State<TodayLogScreen> {
                         height: 5.h,
                       ),
                       Text(
-                        'Blockchain Internationale',
+                        'Manager',
                         style: TextStyle(
                           color: Color(0xFF929194),
                           fontFamily: "SFPro",
@@ -90,7 +104,7 @@ class _TodayLogScreenState extends State<TodayLogScreen> {
                             width: 5,
                           ),
                           Text(
-                            '09:10 AM',
+                            '000126',
                             style: TextStyle(
                               color: Color(0xFFEBEBF5),
                               fontFamily: "SFPro",

@@ -1,7 +1,8 @@
-import 'package:attendance_management/screens/create_user_screen.dart';
-import 'package:attendance_management/screens/edit_user_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'create_user_screen.dart';
+import 'edit_user_screen.dart';
 
 class CreateEditUserScreen extends StatefulWidget {
   const CreateEditUserScreen({Key? key}) : super(key: key);

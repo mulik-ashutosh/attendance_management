@@ -1,5 +1,7 @@
+import 'package:attendance_management/repository/organization/organization_network_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class CreateCompanyScreen extends StatefulWidget {
   const CreateCompanyScreen({Key? key}) : super(key: key);
@@ -9,6 +11,14 @@ class CreateCompanyScreen extends StatefulWidget {
 }
 
 class _CreateCompanyScreenState extends State<CreateCompanyScreen> {
+  final TextEditingController _companyNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,6 +92,7 @@ class _CreateCompanyScreenState extends State<CreateCompanyScreen> {
                               ),
                             ),
                             TextField(
+                              controller: _companyNameController,
                               decoration: const InputDecoration(
                                 isDense: true,
                                 border: InputBorder.none,
@@ -150,6 +161,7 @@ class _CreateCompanyScreenState extends State<CreateCompanyScreen> {
                               ),
                             ),
                             TextField(
+                              controller: _emailController,
                               decoration: const InputDecoration(
                                 isDense: true,
                                 border: InputBorder.none,
@@ -177,17 +189,32 @@ class _CreateCompanyScreenState extends State<CreateCompanyScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Container(
-                    width: 359,
-                    height: 44,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF0A84FF),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Save',
-                        style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
+                  GestureDetector(
+                    onTap: (){
+                      OrganizationNetworkHandler().createCompany(name: "dgdfgdf", email: "ashutosh@mail.com");
+                      // Fluttertoast.showToast(
+                      //     msg: "Company Created Successfully",
+                      //     toastLength: Toast.LENGTH_SHORT,
+                      //     gravity: ToastGravity.CENTER,
+                      //     timeInSecForIosWeb: 1,
+                      //     backgroundColor: Colors.grey,
+                      //     textColor: Colors.white,
+                      //     fontSize: 16.0
+                      // );
+
+                    },
+                    child: Container(
+                      width: 359,
+                      height: 44,
+                      decoration: BoxDecoration(
+                        color: Color(0xFF0A84FF),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Save',
+                          style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
+                        ),
                       ),
                     ),
                   ),

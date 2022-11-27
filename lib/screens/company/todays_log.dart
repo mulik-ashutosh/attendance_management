@@ -1,36 +1,23 @@
-import 'package:attendance_management/screens/create_edit_user_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../repository/company/company_network_handler.dart';
 
-class TotalEmployeeScreen extends StatefulWidget {
-  const TotalEmployeeScreen({Key? key}) : super(key: key);
+import 'create_edit_user_screen.dart';
+
+class TodayLogScreen extends StatefulWidget {
+  const TodayLogScreen({Key? key}) : super(key: key);
 
   @override
-  State<TotalEmployeeScreen> createState() => _TotalEmployeeScreenState();
+  State<TodayLogScreen> createState() => _TodayLogScreenState();
 }
 
-class _TotalEmployeeScreenState extends State<TotalEmployeeScreen> {
-
-  //CompanyEmployeeGetModel? user;
-
-  @override
-  void initState() {
-    super.initState();
-    //getUsers();
-  }
-
-  // void getUsers() async {
-  //   var user = (await CompanyNetworkHandler().getDio());
-  // }
-
+class _TodayLogScreenState extends State<TodayLogScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Total Employee"),
+        title: const Text("Today logs"),
         backgroundColor: Colors.black,
         titleTextStyle: TextStyle(
           fontSize: 25.sp,
@@ -72,7 +59,7 @@ class _TotalEmployeeScreenState extends State<TotalEmployeeScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Manish Gupta',
+                        'Mon 01 May',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20.sp,
@@ -83,7 +70,7 @@ class _TotalEmployeeScreenState extends State<TotalEmployeeScreen> {
                         height: 5.h,
                       ),
                       Text(
-                        'Manager',
+                        'Blockchain Internationale',
                         style: TextStyle(
                           color: Color(0xFF929194),
                           fontFamily: "SFPro",
@@ -104,7 +91,7 @@ class _TotalEmployeeScreenState extends State<TotalEmployeeScreen> {
                             width: 5,
                           ),
                           Text(
-                            '000126',
+                            '09:10 AM',
                             style: TextStyle(
                               color: Color(0xFFEBEBF5),
                               fontFamily: "SFPro",

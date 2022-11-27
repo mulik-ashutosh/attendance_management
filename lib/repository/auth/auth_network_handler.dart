@@ -14,15 +14,19 @@ class AuthNetworkHandler {
   //auth employee login post method
   Future<AuthEmployeeLoginPostModel?> employeePostDio(
       {required String email, required String idToken}) async {
-    var response = await dio.post(
-      '${Constants.baseUrl}/auth/login',
-      data: {
-        "email": email,
-        "idToken": idToken,
-      },
-    );
-    if (response.statusCode == 200) {
-      return AuthEmployeeLoginPostModel.fromJson(response.data);
+    try {
+      var response = await dio.post(
+        '${Constants.baseUrl}/auth/login',
+        data: {
+          "email": email,
+          "idToken": idToken,
+        },
+      );
+      if (response.statusCode == 200) {
+        return AuthEmployeeLoginPostModel.fromJson(response.data);
+      }
+    } catch (e) {
+      print(e);
     }
     return null;
   }

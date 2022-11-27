@@ -1,9 +1,9 @@
-import 'package:attendance_management/screens/edit_user_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../create_edit_user_screen.dart';
-import '../office/todays_log.dart';
+import '../../model/organization_models/organization_companies_get_model.dart';
+import '../../repository/organization/organization_network_handler.dart';
+import '../company/todays_log.dart';
 import 'create_edit_company_screen.dart';
 
 class OrganizationHomeScreen extends StatefulWidget {
@@ -14,6 +14,14 @@ class OrganizationHomeScreen extends StatefulWidget {
 }
 
 class _OrganizationHomeScreenState extends State<OrganizationHomeScreen> {
+  OrganizationCompaniesGetModel? organizationCompaniesGetModel;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -257,7 +265,7 @@ class _OrganizationHomeScreenState extends State<OrganizationHomeScreen> {
                                   ),
                                 ),
                                 Text(
-                                  "256",
+                                  organizationCompaniesGetModel?.totalResults.toString() ?? "",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontFamily: "SFPro",
@@ -294,7 +302,7 @@ class _OrganizationHomeScreenState extends State<OrganizationHomeScreen> {
                   ),
                   child: Center(
                     child: Text(
-                      "Create / Edit a Organization",
+                      "Create / Edit a Company",
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: "SFPro",
