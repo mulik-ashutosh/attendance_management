@@ -1,17 +1,17 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:attendance_management/screens/user/user_home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../model/auth_models/auth_company_login_post_model.dart';
 import '../model/auth_models/auth_employee_login_post_model.dart';
 import '../model/auth_models/auth_organization_login_post_model.dart';
 import '../repository/auth/auth_network_handler.dart';
+import '../utils/enums.dart';
 import 'company/company_home_screen.dart';
 import 'organization/organization_home_screen.dart';
-
-
-// ignore: constant_identifier_names
-enum UserType { Organization, Company, User }
 
 class LoginScreen extends StatefulWidget {
   final UserType userType;
@@ -51,28 +51,45 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               GestureDetector(
                 onTap: () async {
-                  //Navigator.push(context, MaterialPageRoute(builder: (context) => SuperAdminHomeScreen()));
-                  if (await signInWithGoogle()) {
-                    if (widget.userType == UserType.Organization) {
+                  if (widget.userType == UserType.Organization) {
+                    AuthOrganizationLoginPostModel? authModel = await orgSignIn();
+                    if (authModel != null) {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const OrganizationHomeScreen()));
-                    }
-                    if (widget.userType == UserType.User) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const UserHomeScreen()));
-                    }
-                    if (widget.userType == UserType.Company) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const CompanyHomeScreen()));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => OrganizationHomeScreen(
+                            organizationLoginPostModel: authModel,
+                          ),
+                        ),
+                      );
                     }
                   }
+
+                  if (widget.userType == UserType.Company) {
+                    AuthCompanyLoginPostModel? authCompanyModel = await companySignIn();
+                    if (authCompanyModel != null) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CompanyHomeScreen(
+                            authCompanyLoginPostModel: authCompanyModel,
+                          ),
+                        ),
+                      );
+                    }
+                  }
+
+                  // if (await signInWithGoogle()) {
+                  //   if (widget.userType == UserType.Organization) {
+                  //     Navigator.push(context, MaterialPageRoute(builder: (context) => const OrganizationHomeScreen()));
+                  //   }
+                  //   if (widget.userType == UserType.User) {
+                  //     Navigator.push(context, MaterialPageRoute(builder: (context) => const UserHomeScreen()));
+                  //   }
+                  //   if (widget.userType == UserType.Company) {
+                  //     Navigator.push(context, MaterialPageRoute(builder: (context) => const CompanyHomeScreen()));
+                  //   }
+                  // }
                 },
                 child: Container(
                   width: ScreenUtil().screenWidth,
@@ -108,46 +125,47 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Future<bool> signInWithGoogle() async {
+  Future<AuthOrganizationLoginPostModel?> orgSignIn() async {
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
     // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth =
-        await googleUser?.authentication;
+    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
 
     if (widget.userType == UserType.Organization) {
-      AuthOrganizationLoginPostModel? response = await AuthNetworkHandler()
-          .organizationPostDio(
-              email: /*googleUser?.email ?? */ "bhau@testy.com",
-              idToken: googleAuth?.idToken ?? '');
-      if (response != null) {
-        return true;
-      }
-    }
-
-    if (widget.userType == UserType.User) {
-      AuthEmployeeLoginPostModel? response = await AuthNetworkHandler()
-          .employeePostDio(
-              email: /*googleUser?.email ?? */ 'anand5@bi.com',
-              idToken: googleAuth?.idToken ?? '');
-      if (response != null) {
-        return true;
-      }
-    }
-
-    if (widget.userType == UserType.Company) {
-      AuthCompanyLoginPostModel? response =
-          await AuthNetworkHandler().companyPostDio(
-        email: /*googleUser?.email ?? */ "company@bi.com",
+      AuthOrganizationLoginPostModel? response = await AuthNetworkHandler().organizationLogin(
+        email: "bhau@testy.com",
         idToken: googleAuth?.idToken ?? '',
       );
+
+      GetStorage().write("org", response);
+
       if (response != null) {
-        return true;
+        return response;
       }
     }
 
-    return false;
+    return null;
+  }
 
+  Future<AuthCompanyLoginPostModel?> companySignIn() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+    AuthCompanyLoginPostModel? response = await AuthNetworkHandler().companyPostDio(
+      email: "bhau@testy.com",
+      idToken: googleAuth?.idToken ?? '',
+    );
+
+    GetStorage().write("org", response);
+
+    if (response != null) {
+      return response;
+    }
+
+    return null;
   }
 }

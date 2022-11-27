@@ -3,10 +3,12 @@ import 'package:attendance_management/screens/company/total_employee.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../model/auth_models/auth_company_login_post_model.dart';
 import 'create_edit_user_screen.dart';
 
 class CompanyHomeScreen extends StatefulWidget {
-  const CompanyHomeScreen({Key? key}) : super(key: key);
+  final AuthCompanyLoginPostModel authCompanyLoginPostModel;
+  const CompanyHomeScreen({Key? key, required this.authCompanyLoginPostModel}) : super(key: key);
 
   @override
   State<CompanyHomeScreen> createState() => _CompanyHomeScreenState();
@@ -136,7 +138,7 @@ class _CompanyHomeScreenState extends State<CompanyHomeScreen> {
               Row(
                 children: [
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => const TodayLogScreen()));
                     },
                     child: Container(
@@ -222,7 +224,7 @@ class _CompanyHomeScreenState extends State<CompanyHomeScreen> {
                               ],
                             ),
                           ),
-                          onTap: (){
+                          onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(

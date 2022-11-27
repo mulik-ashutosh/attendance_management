@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get_storage/get_storage.dart';
 
+import '../../model/auth_models/auth_organization_login_post_model.dart';
 import '../../model/organization_models/organization_companies_get_model.dart';
 import '../../repository/organization/organization_network_handler.dart';
 import '../company/todays_log.dart';
 import 'create_edit_company_screen.dart';
 
 class OrganizationHomeScreen extends StatefulWidget {
-  const OrganizationHomeScreen({Key? key}) : super(key: key);
+  final AuthOrganizationLoginPostModel organizationLoginPostModel;
+  const OrganizationHomeScreen({Key? key, required this.organizationLoginPostModel}) : super(key: key);
 
   @override
   State<OrganizationHomeScreen> createState() => _OrganizationHomeScreenState();
@@ -15,12 +18,13 @@ class OrganizationHomeScreen extends StatefulWidget {
 
 class _OrganizationHomeScreenState extends State<OrganizationHomeScreen> {
   OrganizationCompaniesGetModel? organizationCompaniesGetModel;
+  AuthOrganizationLoginPostModel? organizationLoginPostModel;
 
   @override
   void initState() {
+    organizationLoginPostModel = widget.organizationLoginPostModel;
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +55,7 @@ class _OrganizationHomeScreenState extends State<OrganizationHomeScreen> {
                 height: 250.h,
                 width: ScreenUtil().screenWidth,
                 decoration: BoxDecoration(
-                  color: Color(0xFF26252C),
+                  color: const Color(0xFF26252C),
                   borderRadius: BorderRadius.circular(10.r),
                 ),
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
@@ -91,7 +95,7 @@ class _OrganizationHomeScreenState extends State<OrganizationHomeScreen> {
                           ),
                         ),
                         Text(
-                          "Sahil",
+                          organizationLoginPostModel?.employee?.name ?? '',
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: "SFPro",
@@ -114,7 +118,7 @@ class _OrganizationHomeScreenState extends State<OrganizationHomeScreen> {
                           ),
                         ),
                         Text(
-                          "Manager",
+                          organizationLoginPostModel?.employee?.role ?? '',
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: "SFPro",
@@ -190,7 +194,7 @@ class _OrganizationHomeScreenState extends State<OrganizationHomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -287,7 +291,14 @@ class _OrganizationHomeScreenState extends State<OrganizationHomeScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const CreateEditCompanyScreen()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CreateEditCompanyScreen(
+                        organizationLoginPostModel: widget.organizationLoginPostModel,
+                      ),
+                    ),
+                  );
                 },
                 child: Container(
                   height: 102.h,

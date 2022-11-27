@@ -7,13 +7,11 @@ import '../../model/auth_models/auth_employee_login_post_model.dart';
 import '../../model/auth_models/auth_organization_login_post_model.dart';
 import '../../model/auth_models/auth_super_admin_login_post_model.dart';
 
-
 class AuthNetworkHandler {
   final Dio dio = Dio();
 
   //auth employee login post method
-  Future<AuthEmployeeLoginPostModel?> employeePostDio(
-      {required String email, required String idToken}) async {
+  Future<AuthEmployeeLoginPostModel?> employeePostDio({required String email, required String idToken}) async {
     try {
       var response = await dio.post(
         '${Constants.baseUrl}/auth/login',
@@ -32,11 +30,12 @@ class AuthNetworkHandler {
   }
 
   //auth organization login post method
-  Future<AuthOrganizationLoginPostModel?> organizationPostDio(
-      {required String email, required String idToken}) async {
+  Future<AuthOrganizationLoginPostModel?> organizationLogin({required String email, required String idToken}) async {
     try {
-      var response = await dio.post('${Constants.baseUrl}/auth/login',
-          data: {'email': email, 'idToken': idToken});
+      var response = await dio.post(
+        '${Constants.baseUrl}/auth/login',
+        data: {'email': email, 'idToken': idToken},
+      );
       if (response.statusCode == 200) {
         return AuthOrganizationLoginPostModel.fromJson(response.data);
       }
@@ -45,10 +44,10 @@ class AuthNetworkHandler {
     }
     return null;
   }
+
   //
   // //auth company login post method
-  Future<AuthCompanyLoginPostModel?> companyPostDio(
-      {required String email, required String idToken}) async {
+  Future<AuthCompanyLoginPostModel?> companyPostDio({required String email, required String idToken}) async {
     try {
       var response = await dio.post('${Constants.baseUrl}/auth/login', data: {
         "email": email,

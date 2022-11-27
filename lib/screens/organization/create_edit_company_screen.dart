@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../model/auth_models/auth_organization_login_post_model.dart';
 import 'create_company_screen.dart';
 import 'edit_company_screen.dart';
 
 class CreateEditCompanyScreen extends StatefulWidget {
-  const CreateEditCompanyScreen({Key? key}) : super(key: key);
+  final AuthOrganizationLoginPostModel organizationLoginPostModel;
+  const CreateEditCompanyScreen({Key? key, required this.organizationLoginPostModel}) : super(key: key);
 
   @override
   State<CreateEditCompanyScreen> createState() => _CreateEditCompanyScreenState();
@@ -22,7 +24,7 @@ class _CreateEditCompanyScreenState extends State<CreateEditCompanyScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => const EditCompanyScreen()));
               },
               child: Container(
@@ -48,8 +50,15 @@ class _CreateEditCompanyScreenState extends State<CreateEditCompanyScreen> {
               height: 20.h,
             ),
             GestureDetector(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const CreateCompanyScreen()));
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CreateCompanyScreen(
+                      organizationLoginPostModel: widget.organizationLoginPostModel,
+                    ),
+                  ),
+                );
               },
               child: Container(
                 height: 50.h,

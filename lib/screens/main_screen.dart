@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../repository/auth/auth_network_handler.dart';
+import '../utils/enums.dart';
+
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 
@@ -27,8 +29,7 @@ class _MainScreenState extends State<MainScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                    const LoginScreen(userType: UserType.Organization),
+                    builder: (context) => const LoginScreen(userType: UserType.Organization),
                   ),
                 );
               },
@@ -60,8 +61,7 @@ class _MainScreenState extends State<MainScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        const LoginScreen(userType: UserType.Company),
+                    builder: (context) => const LoginScreen(userType: UserType.Company),
                   ),
                 );
               },
@@ -77,10 +77,7 @@ class _MainScreenState extends State<MainScreen> {
                   child: const Center(
                     child: Text(
                       'Company',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500),
+                      style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
                     ),
                   ),
                 ),
@@ -91,9 +88,7 @@ class _MainScreenState extends State<MainScreen> {
                 //Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginScreen2()));
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          const LoginScreen(userType: UserType.User)),
+                  MaterialPageRoute(builder: (context) => const LoginScreen(userType: UserType.User)),
                 );
               },
               child: Padding(
@@ -108,10 +103,7 @@ class _MainScreenState extends State<MainScreen> {
                   child: const Center(
                     child: Text(
                       'User',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500),
+                      style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
                     ),
                   ),
                 ),
