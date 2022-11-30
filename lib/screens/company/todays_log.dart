@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'create_edit_user_screen.dart';
 
 class TodayLogScreen extends StatefulWidget {
@@ -31,14 +30,7 @@ class _TodayLogScreenState extends State<TodayLogScreen> {
         physics: const BouncingScrollPhysics(),
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const CreateEditUserScreen(),
-                ),
-              );
-            },
+            onTap: () {},
             child: Container(
               height: 80.h,
               decoration: BoxDecoration(

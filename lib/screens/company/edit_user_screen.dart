@@ -70,7 +70,8 @@ class _EditUserScreenState extends State<EditUserScreen> {
                       ),
                       margin: EdgeInsets.symmetric(vertical: 5.h),
                       child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 10.h, horizontal: 15.w),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -104,7 +105,8 @@ class _EditUserScreenState extends State<EditUserScreen> {
                       ),
                       margin: EdgeInsets.symmetric(vertical: 5.h),
                       child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 10.h, horizontal: 15.w),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -138,7 +140,8 @@ class _EditUserScreenState extends State<EditUserScreen> {
                       ),
                       margin: EdgeInsets.symmetric(vertical: 5.h),
                       child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 10.h, horizontal: 15.w),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -187,7 +190,10 @@ class _EditUserScreenState extends State<EditUserScreen> {
                     child: Center(
                       child: Text(
                         'Save',
-                        style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500),
                       ),
                     ),
                   ),

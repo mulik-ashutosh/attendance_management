@@ -1,29 +1,33 @@
+import 'package:attendance_management/repository/employee/employee_network_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../repository/company/company_network_handler.dart';
-import 'create_edit_user_screen.dart';
+import '../../model/auth_models/auth_company_login_post_model.dart';
+import '../../model/employee_models/company_get_employee_model.dart';
 
 class TotalEmployeeScreen extends StatefulWidget {
-  const TotalEmployeeScreen({Key? key}) : super(key: key);
+  AuthCompanyLoginPostModel companyLoginPostModel;
+  TotalEmployeeScreen({Key? key, required this.companyLoginPostModel}) : super(key: key);
 
   @override
   State<TotalEmployeeScreen> createState() => _TotalEmployeeScreenState();
 }
 
 class _TotalEmployeeScreenState extends State<TotalEmployeeScreen> {
-
-  //CompanyEmployeeGetModel? user;
-
+  AuthCompanyLoginPostModel? companyLoginPostModel;
+  CompanyGetEmployeeModel? employeeData;
+  
   @override
   void initState() {
+    companyLoginPostModel = widget.companyLoginPostModel;
     super.initState();
-    //getUsers();
+    getEmployee();
   }
-
-  // void getUsers() async {
-  //   var user = (await CompanyNetworkHandler().getDio());
-  // }
-
+  
+  void getEmployee() async {
+    employeeData = (await EmployeeNetworkHandler().getEmployee(token: widget.companyLoginPostModel.tokens?.access?.token ?? ""))!;
+    Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,14 +48,7 @@ class _TotalEmployeeScreenState extends State<TotalEmployeeScreen> {
         physics: const BouncingScrollPhysics(),
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const CreateEditUserScreen(),
-                ),
-              );
-            },
+            onTap: () {},
             child: Container(
               height: 80.h,
               decoration: BoxDecoration(
@@ -72,7 +69,7 @@ class _TotalEmployeeScreenState extends State<TotalEmployeeScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Manish Gupta',
+                        employeeData?.results?[0].name.toString() ?? "",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20.sp,
@@ -82,7 +79,7 @@ class _TotalEmployeeScreenState extends State<TotalEmployeeScreen> {
                       SizedBox(
                         height: 5.h,
                       ),
-                      Text(
+                      const Text(
                         'Manager',
                         style: TextStyle(
                           color: Color(0xFF929194),

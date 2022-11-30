@@ -4,17 +4,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../model/auth_models/auth_company_login_post_model.dart';
+import '../../model/company_models/company_employees_get_model.dart';
 import 'create_edit_user_screen.dart';
 
 class CompanyHomeScreen extends StatefulWidget {
-  final AuthCompanyLoginPostModel authCompanyLoginPostModel;
-  const CompanyHomeScreen({Key? key, required this.authCompanyLoginPostModel}) : super(key: key);
+  final AuthCompanyLoginPostModel companyLoginPostModel;
+
+  const CompanyHomeScreen({Key? key, required this.companyLoginPostModel})
+      : super(key: key);
 
   @override
   State<CompanyHomeScreen> createState() => _CompanyHomeScreenState();
 }
 
 class _CompanyHomeScreenState extends State<CompanyHomeScreen> {
+  CompanyEmployeesGetModel? companyEmployeesGetModel;
+  AuthCompanyLoginPostModel? companyLoginPostModel;
+
+  @override
+  void initState() {
+    companyLoginPostModel = widget.companyLoginPostModel;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +56,7 @@ class _CompanyHomeScreenState extends State<CompanyHomeScreen> {
                 height: 250.h,
                 width: ScreenUtil().screenWidth,
                 decoration: BoxDecoration(
-                  color: Color(0xFF26252C),
+                  color: const Color(0xFF26252C),
                   borderRadius: BorderRadius.circular(10.r),
                 ),
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
@@ -84,7 +96,7 @@ class _CompanyHomeScreenState extends State<CompanyHomeScreen> {
                           ),
                         ),
                         Text(
-                          "Sahil",
+                          companyLoginPostModel?.employee?.name ?? "",
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: "SFPro",
@@ -107,7 +119,7 @@ class _CompanyHomeScreenState extends State<CompanyHomeScreen> {
                           ),
                         ),
                         Text(
-                          "Manager",
+                          companyLoginPostModel?.employee?.role ?? "",
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: "SFPro",
@@ -139,7 +151,10 @@ class _CompanyHomeScreenState extends State<CompanyHomeScreen> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const TodayLogScreen()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const TodayLogScreen()));
                     },
                     child: Container(
                       height: 229.h,
@@ -228,7 +243,8 @@ class _CompanyHomeScreenState extends State<CompanyHomeScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const TotalEmployeeScreen(),
+                                builder: (context) =>
+                                    TotalEmployeeScreen(companyLoginPostModel: widget.companyLoginPostModel,),
                               ),
                             );
                           },
@@ -241,7 +257,10 @@ class _CompanyHomeScreenState extends State<CompanyHomeScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const CreateEditUserScreen(),
+                                builder: (context) => CreateEditUserScreen(
+                                  companyLoginPostModel:
+                                      widget.companyLoginPostModel,
+                                ),
                               ),
                             );
                           },

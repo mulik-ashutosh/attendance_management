@@ -1,5 +1,4 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'package:attendance_management/screens/user/user_home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -52,7 +51,8 @@ class _LoginScreenState extends State<LoginScreen> {
               GestureDetector(
                 onTap: () async {
                   if (widget.userType == UserType.Organization) {
-                    AuthOrganizationLoginPostModel? authModel = await orgSignIn();
+                    AuthOrganizationLoginPostModel? authModel =
+                        await orgSignIn();
                     if (authModel != null) {
                       Navigator.push(
                         context,
@@ -66,14 +66,26 @@ class _LoginScreenState extends State<LoginScreen> {
                   }
 
                   if (widget.userType == UserType.Company) {
-                    AuthCompanyLoginPostModel? authCompanyModel = await companySignIn();
+                    AuthCompanyLoginPostModel? authCompanyModel =
+                        await companySignIn();
                     if (authCompanyModel != null) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => CompanyHomeScreen(
-                            authCompanyLoginPostModel: authCompanyModel,
-                          ),
+                            builder: (context) => CompanyHomeScreen(
+                                companyLoginPostModel: authCompanyModel)),
+                      );
+                    }
+                  }
+
+                  if (widget.userType == UserType.User) {
+                    AuthEmployeeLoginPostModel? authUserModel =
+                        await userSignIn();
+                    if (authUserModel != null) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => UserHomeScreen(employeeLoginPostModel: authUserModel,),
                         ),
                       );
                     }
@@ -130,10 +142,12 @@ class _LoginScreenState extends State<LoginScreen> {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
     // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
 
     if (widget.userType == UserType.Organization) {
-      AuthOrganizationLoginPostModel? response = await AuthNetworkHandler().organizationLogin(
+      AuthOrganizationLoginPostModel? response =
+          await AuthNetworkHandler().organizationLogin(
         email: "bhau@testy.com",
         idToken: googleAuth?.idToken ?? '',
       );
@@ -153,14 +167,39 @@ class _LoginScreenState extends State<LoginScreen> {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
     // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
 
-    AuthCompanyLoginPostModel? response = await AuthNetworkHandler().companyPostDio(
+    AuthCompanyLoginPostModel? response =
+        await AuthNetworkHandler().companyLogin(
       email: "bhau@testy.com",
       idToken: googleAuth?.idToken ?? '',
     );
 
-    GetStorage().write("org", response);
+    GetStorage().write("company", response);
+
+    if (response != null) {
+      return response;
+    }
+
+    return null;
+  }
+
+  Future<AuthEmployeeLoginPostModel?> userSignIn() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    AuthEmployeeLoginPostModel? response =
+        await AuthNetworkHandler().employeeLogin(
+      email: "anand6@bi.com",
+      idToken: googleAuth?.idToken ?? '',
+    );
+
+    GetStorage().write("employee", response);
 
     if (response != null) {
       return response;

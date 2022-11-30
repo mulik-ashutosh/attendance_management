@@ -1,17 +1,38 @@
 import 'dart:math';
 
+import 'package:attendance_management/model/employee_models/employee_dashboard_model.dart';
+import 'package:attendance_management/repository/employee/employee_network_handler.dart';
 import 'package:attendance_management/screens/card_anim.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../model/auth_models/auth_employee_login_post_model.dart';
+
 class UserHomeScreen extends StatefulWidget {
-  const UserHomeScreen({Key? key}) : super(key: key);
+  final AuthEmployeeLoginPostModel employeeLoginPostModel;
+  const UserHomeScreen({Key? key,required this.employeeLoginPostModel}) : super(key: key);
 
   @override
   State<UserHomeScreen> createState() => _UserHomeScreenState();
 }
 
 class _UserHomeScreenState extends State<UserHomeScreen> {
+  AuthEmployeeLoginPostModel? employeeLoginPostModel;
+  EmployeeDashboardModel? getDashboard;
+
+  @override
+  void initState() {
+    employeeLoginPostModel = widget.employeeLoginPostModel;
+    super.initState();
+    getEmployeeDashboard();
+  }
+
+  void getEmployeeDashboard() async {
+    getDashboard = (await EmployeeNetworkHandler().employeeDashboard(token: widget.employeeLoginPostModel.tokens?.access?.token ?? ""))!;
+    Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
+  }
+
+
   final List<String> days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
   final int selectedDay = 1;
 
@@ -75,7 +96,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                             height: 10.h,
                           ),
                           Text(
-                            "03h17m",
+                            getDashboard?.attendance.toString() ?? "",
                             style: TextStyle(
                               color: Colors.white,
                               fontFamily: "SFPro",
@@ -118,7 +139,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                                   ),
                                 ),
                                 Text(
-                                  "09:34 AM",
+                                  getDashboard?.recentLog.toString() ?? "",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontFamily: "SFPro",

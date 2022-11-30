@@ -2,13 +2,14 @@ import 'package:attendance_management/repository/organization/organization_netwo
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get_storage/get_storage.dart';
-
 import '../../model/auth_models/auth_organization_login_post_model.dart';
 
 class CreateCompanyScreen extends StatefulWidget {
   final AuthOrganizationLoginPostModel organizationLoginPostModel;
-  const CreateCompanyScreen({Key? key, required this.organizationLoginPostModel}) : super(key: key);
+
+  const CreateCompanyScreen(
+      {Key? key, required this.organizationLoginPostModel})
+      : super(key: key);
 
   @override
   State<CreateCompanyScreen> createState() => _CreateCompanyScreenState();
@@ -17,15 +18,12 @@ class CreateCompanyScreen extends StatefulWidget {
 class _CreateCompanyScreenState extends State<CreateCompanyScreen> {
   final TextEditingController _companyNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -46,7 +44,7 @@ class _CreateCompanyScreenState extends State<CreateCompanyScreen> {
                     ),
                     Center(
                       child: Text(
-                        'Create Organization',
+                        'Create Company',
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: "SFPro",
@@ -84,7 +82,8 @@ class _CreateCompanyScreenState extends State<CreateCompanyScreen> {
                       ),
                       margin: EdgeInsets.symmetric(vertical: 5.h),
                       child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 10.h, horizontal: 15.w),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -119,7 +118,8 @@ class _CreateCompanyScreenState extends State<CreateCompanyScreen> {
                       ),
                       margin: EdgeInsets.symmetric(vertical: 5.h),
                       child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 10.h, horizontal: 15.w),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -153,7 +153,8 @@ class _CreateCompanyScreenState extends State<CreateCompanyScreen> {
                       ),
                       margin: EdgeInsets.symmetric(vertical: 5.h),
                       child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 10.h, horizontal: 15.w),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -196,19 +197,30 @@ class _CreateCompanyScreenState extends State<CreateCompanyScreen> {
                   GestureDetector(
                     onTap: () {
                       OrganizationNetworkHandler().createCompany(
-                        name: "dgdfgdf",
-                        email: "ashutosh@mail.com",
-                        organizationLoginPostModel: widget.organizationLoginPostModel,
+                        name: _companyNameController.text,
+                        email: _emailController.text,
+                        token: widget.organizationLoginPostModel.tokens?.access
+                                ?.token ??
+                            "",
                       );
-                      // Fluttertoast.showToast(
-                      //     msg: "Company Created Successfully",
-                      //     toastLength: Toast.LENGTH_SHORT,
-                      //     gravity: ToastGravity.CENTER,
-                      //     timeInSecForIosWeb: 1,
-                      //     backgroundColor: Colors.grey,
-                      //     textColor: Colors.white,
-                      //     fontSize: 16.0
-                      // );
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                      // Navigator.pop(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => OrganizationHomeScreen(
+                      //               organizationLoginPostModel:
+                      //                   widget.organizationLoginPostModel,
+                      //             )));
+                      Fluttertoast.showToast(
+                          msg: "Company Created Successfully",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.grey,
+                          textColor: Colors.white,
+                          fontSize: 16.0,
+                      );
                     },
                     child: Container(
                       width: 359,
@@ -217,10 +229,13 @@ class _CreateCompanyScreenState extends State<CreateCompanyScreen> {
                         color: Color(0xFF0A84FF),
                         borderRadius: BorderRadius.circular(5),
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'Save',
-                          style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500),
                         ),
                       ),
                     ),

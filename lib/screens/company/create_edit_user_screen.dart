@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import '../../model/auth_models/auth_company_login_post_model.dart';
 import 'create_user_screen.dart';
 import 'edit_user_screen.dart';
 
 class CreateEditUserScreen extends StatefulWidget {
-  const CreateEditUserScreen({Key? key}) : super(key: key);
+  final AuthCompanyLoginPostModel companyLoginPostModel;
+  const CreateEditUserScreen({Key? key, required this.companyLoginPostModel}) : super(key: key);
 
   @override
   State<CreateEditUserScreen> createState() => _CreateEditUserScreenState();
@@ -49,7 +50,7 @@ class _CreateEditUserScreenState extends State<CreateEditUserScreen> {
             ),
             GestureDetector(
               onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const CreateUserScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => CreateUserScreen(companyLoginPostModel: widget.companyLoginPostModel,)));
               },
               child: Container(
                 height: 50.h,

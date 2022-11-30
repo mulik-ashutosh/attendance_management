@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get_storage/get_storage.dart';
-
 import '../../model/auth_models/auth_organization_login_post_model.dart';
 import '../../model/organization_models/organization_companies_get_model.dart';
+import '../../model/organization_models/organization_dashboard_model.dart';
 import '../../repository/organization/organization_network_handler.dart';
 import '../company/todays_log.dart';
 import 'create_edit_company_screen.dart';
@@ -19,11 +18,22 @@ class OrganizationHomeScreen extends StatefulWidget {
 class _OrganizationHomeScreenState extends State<OrganizationHomeScreen> {
   OrganizationCompaniesGetModel? organizationCompaniesGetModel;
   AuthOrganizationLoginPostModel? organizationLoginPostModel;
+  OrganizationDashboardModel? dashboardData;
+
 
   @override
   void initState() {
     organizationLoginPostModel = widget.organizationLoginPostModel;
     super.initState();
+    getDashboard();
+    setState(() {
+
+    });
+  }
+
+  void getDashboard() async {
+    dashboardData = (await OrganizationNetworkHandler().getDashboard(token: widget.organizationLoginPostModel.tokens?.access?.token ?? ""))!;
+    Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
   }
 
   @override
@@ -175,7 +185,7 @@ class _OrganizationHomeScreenState extends State<OrganizationHomeScreen> {
                           height: 10.h,
                         ),
                         Text(
-                          "09:20",
+                          dashboardData?.todayEntered.toString() ?? "",
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: "SFPro",
@@ -227,7 +237,7 @@ class _OrganizationHomeScreenState extends State<OrganizationHomeScreen> {
                                   ),
                                 ),
                                 Text(
-                                  "256",
+                                  dashboardData?.totalEmployees.toString() ?? "0",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontFamily: "SFPro",
@@ -269,7 +279,7 @@ class _OrganizationHomeScreenState extends State<OrganizationHomeScreen> {
                                   ),
                                 ),
                                 Text(
-                                  organizationCompaniesGetModel?.totalResults.toString() ?? "",
+                                  dashboardData?.totalCompanies.toString() ?? "0",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontFamily: "SFPro",

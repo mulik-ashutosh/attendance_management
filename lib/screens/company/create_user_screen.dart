@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
+import '../../model/auth_models/auth_company_login_post_model.dart';
 import '../../repository/company/company_network_handler.dart';
 
 class CreateUserScreen extends StatefulWidget {
-  const CreateUserScreen({Key? key}) : super(key: key);
+  final AuthCompanyLoginPostModel companyLoginPostModel;
+
+  const CreateUserScreen({Key? key, required this.companyLoginPostModel})
+      : super(key: key);
 
   @override
   State<CreateUserScreen> createState() => _CreateUserScreenState();
 }
 
 class _CreateUserScreenState extends State<CreateUserScreen> {
-  final TextEditingController _companyController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _cardIdController = TextEditingController();
@@ -101,14 +105,14 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Company Name',
+                              'User Name',
                               style: TextStyle(
                                 fontSize: 12.sp,
                                 color: const Color(0xFFEBEBF5),
                               ),
                             ),
                             TextField(
-                              controller: _companyController,
+                              controller: _nameController,
                               decoration: const InputDecoration(
                                 isDense: true,
                                 border: InputBorder.none,
@@ -232,42 +236,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                         ),
                       ),
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF26252C),
-                        borderRadius: BorderRadius.circular(5.r),
-                      ),
-                      margin: EdgeInsets.symmetric(vertical: 5.h),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 10.h, horizontal: 15.w),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'User Name',
-                              style: TextStyle(
-                                fontSize: 12.sp,
-                                color: const Color(0xFFEBEBF5),
-                              ),
-                            ),
-                            TextField(
-                              controller: _nameController,
-                              decoration: const InputDecoration(
-                                isDense: true,
-                                border: InputBorder.none,
-                              ),
-                              cursorColor: Colors.white,
-                              style: TextStyle(
-                                fontSize: 18.h,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+
                     Container(
                       decoration: BoxDecoration(
                         color: const Color(0xFF26252C),
@@ -318,9 +287,26 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      setState(() {
-                        createUser();
-                      });
+                      CompanyNetworkHandler().companyCreateEmployee(
+                        name: _nameController.text,
+                        email: _emailController.text,
+                        cardId: _cardIdController.text,
+                        role: _roleController.text,
+                        image: "",
+                        mobile: _phoneController.text,
+                        companyLoginPostModel: widget.companyLoginPostModel,
+                      );
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                      Fluttertoast.showToast(
+                        msg: "User Created Successfully",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.grey,
+                        textColor: Colors.white,
+                        fontSize: 16.0,
+                      );
                     },
                     child: Container(
                       width: 359,
