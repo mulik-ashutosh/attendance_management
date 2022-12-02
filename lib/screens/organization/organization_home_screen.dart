@@ -1,3 +1,4 @@
+import 'package:attendance_management/screens/company/total_employee.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../model/auth_models/auth_organization_login_post_model.dart';
@@ -204,14 +205,14 @@ class _OrganizationHomeScreenState extends State<OrganizationHomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const TodayLogScreen(),
-                              ),
-                            );
-                          },
+                          // onTap: () {
+                          //   Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => TotalEmployeeScreen(),
+                          //     ),
+                          //   );
+                          // },
                           child: Container(
                             height: 102.h,
                             width: 250.w,

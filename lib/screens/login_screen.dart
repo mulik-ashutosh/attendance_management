@@ -90,18 +90,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       );
                     }
                   }
-
-                  // if (await signInWithGoogle()) {
-                  //   if (widget.userType == UserType.Organization) {
-                  //     Navigator.push(context, MaterialPageRoute(builder: (context) => const OrganizationHomeScreen()));
-                  //   }
-                  //   if (widget.userType == UserType.User) {
-                  //     Navigator.push(context, MaterialPageRoute(builder: (context) => const UserHomeScreen()));
-                  //   }
-                  //   if (widget.userType == UserType.Company) {
-                  //     Navigator.push(context, MaterialPageRoute(builder: (context) => const CompanyHomeScreen()));
-                  //   }
-                  // }
                 },
                 child: Container(
                   width: ScreenUtil().screenWidth,
@@ -148,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (widget.userType == UserType.Organization) {
       AuthOrganizationLoginPostModel? response =
           await AuthNetworkHandler().organizationLogin(
-        email: "bhau@testy.com",
+        email: "bhau@test.com",
         idToken: googleAuth?.idToken ?? '',
       );
 
@@ -172,7 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     AuthCompanyLoginPostModel? response =
         await AuthNetworkHandler().companyLogin(
-      email: "bhau@testy.com",
+      email: "company@bi.com",
       idToken: googleAuth?.idToken ?? '',
     );
 
@@ -195,7 +183,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     AuthEmployeeLoginPostModel? response =
         await AuthNetworkHandler().employeeLogin(
-      email: "anand6@bi.com",
+      email: "anand7@bi.com",
       idToken: googleAuth?.idToken ?? '',
     );
 

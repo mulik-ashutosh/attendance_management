@@ -1,14 +1,14 @@
 import 'dart:convert';
-/// results : [{"role":"employee","email":"anand5@bi.com","cardId":"CARD0003","name":"Anand Odedara 3","mobile":"9876543210","company":null,"id":"638216c72b2dd86a6f74a6e0"}]
+/// results : [{"role":"employee","email":"anand@bi.com","cardId":"CARD0001","name":"Anand Odedara","mobile":"9087654321","company":null,"organization":"6388584c0a2783f7e90847f5","id":"638858679009eff7e1474367"},{"role":"employee","email":"anand7@bi.com","cardId":"CARD0005","name":"Anand Odedara 3","mobile":"9087654321","company":null,"organization":"6388584c0a2783f7e90847f5","id":"63897c8144f2880da58d3c25"}]
 /// page : 1
 /// limit : 10
 /// totalPages : 1
-/// totalResults : 1
+/// totalResults : 2
 
-CompanyEmployeesGetModel companyEmployeesGetModelFromJson(String str) => CompanyEmployeesGetModel.fromJson(json.decode(str));
-String companyEmployeesGetModelToJson(CompanyEmployeesGetModel data) => json.encode(data.toJson());
-class CompanyEmployeesGetModel {
-  CompanyEmployeesGetModel({
+CompanyEmployeeGetModel companyEmployeeGetModelFromJson(String str) => CompanyEmployeeGetModel.fromJson(json.decode(str));
+String companyEmployeeGetModelToJson(CompanyEmployeeGetModel data) => json.encode(data.toJson());
+class CompanyEmployeeGetModel {
+  CompanyEmployeeGetModel({
       List<Results>? results, 
       num? page, 
       num? limit, 
@@ -21,7 +21,7 @@ class CompanyEmployeesGetModel {
     _totalResults = totalResults;
 }
 
-  CompanyEmployeesGetModel.fromJson(dynamic json) {
+  CompanyEmployeeGetModel.fromJson(dynamic json) {
     if (json['results'] != null) {
       _results = [];
       json['results'].forEach((v) {
@@ -38,12 +38,12 @@ class CompanyEmployeesGetModel {
   num? _limit;
   num? _totalPages;
   num? _totalResults;
-CompanyEmployeesGetModel copyWith({  List<Results>? results,
+CompanyEmployeeGetModel copyWith({  List<Results>? results,
   num? page,
   num? limit,
   num? totalPages,
   num? totalResults,
-}) => CompanyEmployeesGetModel(  results: results ?? _results,
+}) => CompanyEmployeeGetModel(  results: results ?? _results,
   page: page ?? _page,
   limit: limit ?? _limit,
   totalPages: totalPages ?? _totalPages,
@@ -70,12 +70,13 @@ CompanyEmployeesGetModel copyWith({  List<Results>? results,
 }
 
 /// role : "employee"
-/// email : "anand5@bi.com"
-/// cardId : "CARD0003"
-/// name : "Anand Odedara 3"
-/// mobile : "9876543210"
+/// email : "anand@bi.com"
+/// cardId : "CARD0001"
+/// name : "Anand Odedara"
+/// mobile : "9087654321"
 /// company : null
-/// id : "638216c72b2dd86a6f74a6e0"
+/// organization : "6388584c0a2783f7e90847f5"
+/// id : "638858679009eff7e1474367"
 
 Results resultsFromJson(String str) => Results.fromJson(json.decode(str));
 String resultsToJson(Results data) => json.encode(data.toJson());
@@ -87,6 +88,7 @@ class Results {
       String? name, 
       String? mobile, 
       dynamic company, 
+      String? organization, 
       String? id,}){
     _role = role;
     _email = email;
@@ -94,6 +96,7 @@ class Results {
     _name = name;
     _mobile = mobile;
     _company = company;
+    _organization = organization;
     _id = id;
 }
 
@@ -104,6 +107,7 @@ class Results {
     _name = json['name'];
     _mobile = json['mobile'];
     _company = json['company'];
+    _organization = json['organization'];
     _id = json['id'];
   }
   String? _role;
@@ -112,6 +116,7 @@ class Results {
   String? _name;
   String? _mobile;
   dynamic _company;
+  String? _organization;
   String? _id;
 Results copyWith({  String? role,
   String? email,
@@ -119,6 +124,7 @@ Results copyWith({  String? role,
   String? name,
   String? mobile,
   dynamic company,
+  String? organization,
   String? id,
 }) => Results(  role: role ?? _role,
   email: email ?? _email,
@@ -126,6 +132,7 @@ Results copyWith({  String? role,
   name: name ?? _name,
   mobile: mobile ?? _mobile,
   company: company ?? _company,
+  organization: organization ?? _organization,
   id: id ?? _id,
 );
   String? get role => _role;
@@ -134,6 +141,7 @@ Results copyWith({  String? role,
   String? get name => _name;
   String? get mobile => _mobile;
   dynamic get company => _company;
+  String? get organization => _organization;
   String? get id => _id;
 
   Map<String, dynamic> toJson() {
@@ -144,6 +152,7 @@ Results copyWith({  String? role,
     map['name'] = _name;
     map['mobile'] = _mobile;
     map['company'] = _company;
+    map['organization'] = _organization;
     map['id'] = _id;
     return map;
   }

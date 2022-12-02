@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
+import 'dart:math';
 import '../../model/auth_models/auth_company_login_post_model.dart';
 import '../../repository/company/company_network_handler.dart';
 
@@ -18,23 +18,24 @@ class CreateUserScreen extends StatefulWidget {
 class _CreateUserScreenState extends State<CreateUserScreen> {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _cardIdController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _roleController = TextEditingController();
+  String randomString = "";
 
   @override
   void initState() {
     super.initState();
-    //createUser();
+    generateRandomString(5);
+    print(randomString);
   }
 
-  void createUser() {
-    // CompanyNetworkHandler().createEmployeePostDio(
-    //   email: _emailController.text,
-    //   cardId: _cardIdController.text,
-    //   name: _nameController.text,
-    //   role: _roleController.text,
-    // );
+  void generateRandomString(int len) {
+    var r = Random();
+    const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+    String res = List.generate(len, (index) => _chars[r.nextInt(_chars.length)]).join();
+    setState(() {
+      randomString = res;
+    });
   }
 
   @override
@@ -112,6 +113,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                               ),
                             ),
                             TextField(
+                              scrollPadding: EdgeInsets.only(bottom:350.0),
                               controller: _nameController,
                               decoration: const InputDecoration(
                                 isDense: true,
@@ -148,6 +150,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                               ),
                             ),
                             TextField(
+                              scrollPadding: EdgeInsets.only(bottom:280.0),
                               controller: _phoneController,
                               decoration: const InputDecoration(
                                 isDense: true,
@@ -184,6 +187,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                               ),
                             ),
                             TextField(
+                              scrollPadding: EdgeInsets.only(bottom:180.0),
                               controller: _emailController,
                               decoration: const InputDecoration(
                                 isDense: true,
@@ -213,43 +217,6 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'CardID',
-                              style: TextStyle(
-                                fontSize: 12.sp,
-                                color: const Color(0xFFEBEBF5),
-                              ),
-                            ),
-                            TextField(
-                              controller: _cardIdController,
-                              decoration: const InputDecoration(
-                                isDense: true,
-                                border: InputBorder.none,
-                              ),
-                              cursorColor: Colors.white,
-                              style: TextStyle(
-                                fontSize: 18.h,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-
-                    Container(
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF26252C),
-                        borderRadius: BorderRadius.circular(5.r),
-                      ),
-                      margin: EdgeInsets.symmetric(vertical: 5.h),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 10.h, horizontal: 15.w),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
                               'Role',
                               style: TextStyle(
                                 fontSize: 12.sp,
@@ -257,6 +224,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                               ),
                             ),
                             TextField(
+                              scrollPadding: EdgeInsets.only(bottom:100.0),
                               controller: _roleController,
                               decoration: const InputDecoration(
                                 isDense: true,
@@ -290,11 +258,11 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                       CompanyNetworkHandler().companyCreateEmployee(
                         name: _nameController.text,
                         email: _emailController.text,
-                        cardId: _cardIdController.text,
+                        cardId: randomString,
                         role: _roleController.text,
                         image: "",
                         mobile: _phoneController.text,
-                        companyLoginPostModel: widget.companyLoginPostModel,
+                        token: widget.companyLoginPostModel.tokens?.access?.token ?? "",
                       );
                       Navigator.pop(context);
                       Navigator.pop(context);

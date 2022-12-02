@@ -1,10 +1,11 @@
+import 'package:attendance_management/model/company_models/company_dashboard_model.dart';
+import 'package:attendance_management/repository/company/company_network_handler.dart';
 import 'package:attendance_management/screens/company/todays_log.dart';
 import 'package:attendance_management/screens/company/total_employee.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../model/auth_models/auth_company_login_post_model.dart';
-import '../../model/company_models/company_employees_get_model.dart';
 import 'create_edit_user_screen.dart';
 
 class CompanyHomeScreen extends StatefulWidget {
@@ -18,13 +19,19 @@ class CompanyHomeScreen extends StatefulWidget {
 }
 
 class _CompanyHomeScreenState extends State<CompanyHomeScreen> {
-  CompanyEmployeesGetModel? companyEmployeesGetModel;
   AuthCompanyLoginPostModel? companyLoginPostModel;
+  CompanyDashboardModel? dashboardData;
 
   @override
   void initState() {
     companyLoginPostModel = widget.companyLoginPostModel;
     super.initState();
+    getData();
+  }
+
+  void getData() async {
+    dashboardData = (await CompanyNetworkHandler().getDashboard(token: widget.companyLoginPostModel.tokens?.access?.token ?? ""))!;
+    Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
   }
 
   @override
@@ -183,7 +190,7 @@ class _CompanyHomeScreenState extends State<CompanyHomeScreen> {
                             height: 10.h,
                           ),
                           Text(
-                            "09:20",
+                            dashboardData?.todayEntered.toString() ?? "",
                             style: TextStyle(
                               color: Colors.white,
                               fontFamily: "SFPro",
@@ -228,7 +235,7 @@ class _CompanyHomeScreenState extends State<CompanyHomeScreen> {
                                   ),
                                 ),
                                 Text(
-                                  "256",
+                                  dashboardData?.totalEmployees.toString() ?? "",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontFamily: "SFPro",
@@ -244,7 +251,7 @@ class _CompanyHomeScreenState extends State<CompanyHomeScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    TotalEmployeeScreen(companyLoginPostModel: widget.companyLoginPostModel,),
+                                    TotalEmployeeScreen(companyLoginPostModel: widget.companyLoginPostModel),
                               ),
                             );
                           },

@@ -18,7 +18,6 @@ class CreateCompanyScreen extends StatefulWidget {
 class _CreateCompanyScreenState extends State<CreateCompanyScreen> {
   final TextEditingController _companyNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -95,6 +94,7 @@ class _CreateCompanyScreenState extends State<CreateCompanyScreen> {
                               ),
                             ),
                             TextField(
+                              scrollPadding: EdgeInsets.only(bottom:350.0),
                               controller: _companyNameController,
                               decoration: const InputDecoration(
                                 isDense: true,
@@ -131,6 +131,7 @@ class _CreateCompanyScreenState extends State<CreateCompanyScreen> {
                               ),
                             ),
                             TextField(
+                              scrollPadding: EdgeInsets.only(bottom:250.0),
                               decoration: const InputDecoration(
                                 isDense: true,
                                 border: InputBorder.none,
@@ -166,6 +167,7 @@ class _CreateCompanyScreenState extends State<CreateCompanyScreen> {
                               ),
                             ),
                             TextField(
+                              scrollPadding: EdgeInsets.only(bottom:100.0),
                               controller: _emailController,
                               decoration: const InputDecoration(
                                 isDense: true,

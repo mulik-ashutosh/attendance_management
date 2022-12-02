@@ -36,7 +36,6 @@ class OrganizationNetworkHandler {
       ),
     );
     if (response.statusCode == 200) {
-      print("Success");
       return OrganizationCreateCompanyPostModel.fromJson(response.data);
     }
     return null;

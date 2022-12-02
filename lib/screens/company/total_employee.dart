@@ -1,8 +1,10 @@
-import 'package:attendance_management/repository/employee/employee_network_handler.dart';
+import 'package:attendance_management/model/company_models/company_employee_get_model.dart';
+import 'package:attendance_management/repository/organization/organization_network_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../model/auth_models/auth_company_login_post_model.dart';
-import '../../model/employee_models/company_get_employee_model.dart';
+import '../../model/organization_models/organization_dashboard_model.dart';
+import '../../repository/company/company_network_handler.dart';
 
 class TotalEmployeeScreen extends StatefulWidget {
   AuthCompanyLoginPostModel companyLoginPostModel;
@@ -14,7 +16,7 @@ class TotalEmployeeScreen extends StatefulWidget {
 
 class _TotalEmployeeScreenState extends State<TotalEmployeeScreen> {
   AuthCompanyLoginPostModel? companyLoginPostModel;
-  CompanyGetEmployeeModel? employeeData;
+  CompanyEmployeeGetModel? employeeData;
   
   @override
   void initState() {
@@ -24,7 +26,7 @@ class _TotalEmployeeScreenState extends State<TotalEmployeeScreen> {
   }
   
   void getEmployee() async {
-    employeeData = (await EmployeeNetworkHandler().getEmployee(token: widget.companyLoginPostModel.tokens?.access?.token ?? ""))!;
+    employeeData = (await CompanyNetworkHandler().getEmployee(token: widget.companyLoginPostModel.tokens?.access?.token ?? ""))!;
     Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
   }
   
@@ -43,7 +45,7 @@ class _TotalEmployeeScreenState extends State<TotalEmployeeScreen> {
         elevation: 0,
       ),
       body: ListView.separated(
-        itemCount: 10,
+        itemCount: employeeData?.results?.length ?? 0,
         shrinkWrap: true,
         physics: const BouncingScrollPhysics(),
         itemBuilder: (context, index) {
@@ -57,19 +59,20 @@ class _TotalEmployeeScreenState extends State<TotalEmployeeScreen> {
               ),
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
                     width: 50.w,
                     height: 40.h,
                     color: Colors.white,
                   ),
+                  const SizedBox(width: 20,),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        employeeData?.results?[0].name.toString() ?? "",
+                        employeeData?.results?[index].name ?? "",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20.sp,
@@ -79,8 +82,8 @@ class _TotalEmployeeScreenState extends State<TotalEmployeeScreen> {
                       SizedBox(
                         height: 5.h,
                       ),
-                      const Text(
-                        'Manager',
+                      Text(
+                          employeeData?.results?[index].role ?? "",
                         style: TextStyle(
                           color: Color(0xFF929194),
                           fontFamily: "SFPro",
@@ -88,29 +91,29 @@ class _TotalEmployeeScreenState extends State<TotalEmployeeScreen> {
                       ),
                     ],
                   ),
-                  Column(
-                    children: [
-                      Row(
-                        children: const [
-                          Icon(
-                            Icons.circle_rounded,
-                            size: 5,
-                            color: Color(0xFF36995E),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            '000126',
-                            style: TextStyle(
-                              color: Color(0xFFEBEBF5),
-                              fontFamily: "SFPro",
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  )
+                  // Column(
+                  //   children: [
+                  //     Row(
+                  //       children: const [
+                  //         Icon(
+                  //           Icons.circle_rounded,
+                  //           size: 5,
+                  //           color: Color(0xFF36995E),
+                  //         ),
+                  //         SizedBox(
+                  //           width: 5,
+                  //         ),
+                  //         Text(
+                  //           '000126',
+                  //           style: TextStyle(
+                  //             color: Color(0xFFEBEBF5),
+                  //             fontFamily: "SFPro",
+                  //           ),
+                  //         ),
+                  //       ],
+                  //     )
+                  //   ],
+                  // )
                 ],
               ),
             ),
